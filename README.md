@@ -137,10 +137,6 @@ docker build -t qr-decoder .
 ```bash
 docker run --env-file .env qr-decoder:latest
 ```
-- view logs again
-```bash
-docker logs <container_id> -f
-```
 
 > ❔ Can we make change without rebuilding the image?
 
