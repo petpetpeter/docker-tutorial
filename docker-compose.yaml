@@ -1,0 +1,17 @@
+services:
+  qr-decoder:
+    build: .
+    image: docker-tutorial-qr-decoder:latest
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+  
+  # qr-decoder-2:
+  #   image: docker-tutorial-qr-decoder:latest
+  #   volumes:
+  #     - .:/app
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - API_KEY_THAT_WILL_MAKE_YOU_BANKRUPT=${API_KEY_2}
