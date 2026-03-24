@@ -2,6 +2,15 @@
 
 This guide walks you through containerizing a Python application that uses system-level dependencies. In this example, we use `pyzbar` to decode QR codes, which requires the `libzbar0` system library.
 
+## What you will learn?
+- Solving "It works on my machine": How to package system-level dependencies (like libzbar0) so your app runs anywhere.
+
+- Docker Fundamentals: How to write a Dockerfile, build images, and manage containers via the CLI.
+- Environment Management: Using .env files and environment variables to keep secrets out of your code.
+- Persistent Development: Using Volumes to see code changes in real-time without constantly rebuilding your image.
+- Debugging & Inspection: How to "shell into" a running container and view logs to troubleshoot issues.
+- Docker Compose: Scaling from a single docker run command to a manageable docker-compose.yaml file for multiple services.
+
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/) installed.
@@ -10,7 +19,13 @@ This guide walks you through containerizing a Python application that uses syste
 ---
 
 ## Part 0: No Docker -> broken package
-1. Try run the code in python virtual environment
+1. Clone this repo
+```
+git clone https://github.com/petpetpeter/docker-tutorial.git
+cd docker-tutorial
+```
+
+2. Try run the code in python virtual environment
 ```
 python -m venv .venv
 source .venv/bin/activate
@@ -18,13 +33,13 @@ pip install -r requirements.txt
 python src/main.py
 ```
 
-2. You would encounter the following error:
+3. You would encounter the following error:
 ```
 raise ImportError('Unable to find zbar shared library')
 ImportError: Unable to find zbar shared library
 ```
 
-3. Looking at https://pypi.org/project/pyzbar/ we see that it requires `zbar` system library. We can install it using `apt-get`.
+4. Looking at https://pypi.org/project/pyzbar/ we see that it requires `zbar` system library. We can install it using `apt-get`.
 
 ---
 ## Part 1: Using Docker
